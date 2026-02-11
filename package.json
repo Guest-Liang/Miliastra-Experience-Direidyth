@@ -1,0 +1,30 @@
+{
+  "name": "千星奇域每周4000经验",
+  "version": "0.1.0",
+  "description": "千星奇域每周4000经验，但是从奇域收藏里查找置顶的第一个关卡（即已经收藏了，但不可被搜索的奇域，只能通过收藏进入关卡游玩）",
+  "author": {
+    "name": "GuestLiang",
+    "url": "https://github.com/Guest-Liang"
+  },
+  "contributors": [],
+  "keywords": [
+    "千星奇域"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "bettergi-cli --watch",
+    "build": "bettergi-cli"
+  },
+  "devDependencies": {
+    "@bettergi/cli": "^0.2.10",
+    "@bettergi/types": "^0.1.10",
+    "@bettergi/utils": "^0.1.27",
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0"
+  },
+  "engines": {
+    "node": ">=20.19.0 || >=22.12.0"
+  }
+}
