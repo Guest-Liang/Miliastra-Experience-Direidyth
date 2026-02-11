@@ -57,7 +57,7 @@ jobs:
         id: body
         shell: bash
         run: |
-          SHORT_SHA="${GITHUB_SHA::7}"
+          FULL_SHA="${GITHUB_SHA}"
           RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           cat > RELEASE_BODY.md <<EOF
           ## ✅ Build Artifact
@@ -65,7 +65,7 @@ jobs:
           - **Repository**: \`${{ steps.meta.outputs.repo_name }}\`
           - **Version**: \`${{ steps.meta.outputs.version }}\`
           - **Tag**: \`${{ steps.meta.outputs.tag }}\`
-          - **Commit**: \`${SHORT_SHA}\`
+          - **Commit**: \`${FULL_SHA}\`
           - **Triggered by**: @${{ github.actor }}
           - **Workflow run**: ${RUN_URL}
 
