@@ -1,0 +1,90 @@
+name: Build & Release (dist)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Compute artifact name (repo + package.json version)
+        id: meta
+        shell: bash
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          VERSION="$(node -p "require('./package.json').version")"
+          ZIP_NAME="${REPO_NAME}-${VERSION}.zip"
+          echo "repo_name=$REPO_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "zip_name=$ZIP_NAME" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Zip dist
+        shell: bash
+        run: |
+          test -d dist
+          cd dist
+          zip -r "../${{ steps.meta.outputs.zip_name }}" .
+          cd ..
+
+      - name: Generate release body
+        id: body
+        shell: bash
+        run: |
+          FULL_SHA="${GITHUB_SHA}"
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          cat > RELEASE_BODY.md <<EOF
+          ## ✅ Build Artifact
+
+          - **Repository**: \`${{ steps.meta.outputs.repo_name }}\`
+          - **Version**: \`${{ steps.meta.outputs.version }}\`
+          - **Tag**: \`${{ steps.meta.outputs.tag }}\`
+          - **Commit**: \`${FULL_SHA}\`
+          - **Triggered by**: @${{ github.actor }}
+          - **Workflow run**: ${RUN_URL}
+
+          ## 📦 Download
+          - **Asset**: \`${{ steps.meta.outputs.zip_name }}\`
+
+          ## 🧰 Building Tools Version
+          - **Node**: \`$(node -v)\`
+          - **pnpm**: \`$(pnpm -v)\`
+
+          EOF
+
+      - name: Create GitHub Release & upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: ${{ steps.meta.outputs.repo_name }} ${{ steps.meta.outputs.version }}
+          files: ${{ steps.meta.outputs.zip_name }}
+          body_path: RELEASE_BODY.md
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
