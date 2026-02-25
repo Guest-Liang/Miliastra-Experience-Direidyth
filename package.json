@@ -14,9 +14,9 @@
   "scripts": {
     "dev": "bettergi-cli --watch",
     "build": "bettergi-cli",
-    "release:patch": "pnpm version patch -m '🚀 release: v%s'",
-    "release:minor": "pnpm version minor -m '✨ release: v%s'",
-    "release:major": "pnpm version major -m '💥 release: v%s'"
+    "release:patch": "pnpm version patch -m \"🚀 release: v%s\"",
+    "release:minor": "pnpm version minor -m \"✨ release: v%s\"",
+    "release:major": "pnpm version major -m \"💥 release: v%s\""
   },
   "devDependencies": {
     "@bettergi/cli": "^0.2.10",
