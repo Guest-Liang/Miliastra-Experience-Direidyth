@@ -86,5 +86,6 @@ jobs:
           files: ${{ steps.meta.outputs.zip_name }}
           body_path: RELEASE_BODY.md
           generate_release_notes: true
+          target_commitish: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
