@@ -128,9 +128,9 @@ const findFirstSearchResultText = () => {
 const clickToChooseFirstSearchResult = () => {
   click(330, 365)
 }
-// 房间：点击选择第一个收藏的奇域位置
+// 房间：点击选择指定的奇域位置
 const clickToChooseFirstLikeResult = () => {
-  click(400, 825)
+  click(1145, 825)
 }
 // 房间：查找进入房间快捷键按钮
 const findEnterRoomShortcut = () => {

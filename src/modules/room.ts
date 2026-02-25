@@ -52,7 +52,7 @@ const createRoom = async () => {
         log.info("当前不在大厅，前往大厅...")
         goToLobbyButton.click()
       } else {
-        log.info("选择收藏的第一个奇域关卡...")
+        log.info("选择指定位置奇域关卡...")
         clickToChooseFirstLikeResult()
       }
     },
