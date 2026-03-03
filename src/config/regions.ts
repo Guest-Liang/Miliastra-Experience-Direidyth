@@ -42,10 +42,10 @@ const findCloseDialog = () => {
 const clickToContinue = () => {
   click(960, 1070)
 }
-// 查找UID文本
-const findUidText = () => {
-  return findTextWithinBounds("UID", 1620, 1050, 300, 30, { contains: true })
-}
+// // 查找UID文本
+// const findUidText = () => {
+//   return findTextWithinBounds("UID", 1620, 1050, 300, 30, { contains: true })
+// }
 // 查找派蒙图标（判断处于奇域大世界/大厅）
 const findPaimon = () => {
   const iro = findImageWithinBounds(
@@ -62,22 +62,22 @@ const findPaimon = () => {
   iro?.drawSelf("group_img")
   return iro
 }
-// 查找元素视野按钮（判断处于大世界）
-const findElementViewBtn = () => {
-  const iro = findImageWithinBounds(
-    "assets/UI_BtnIcon_ElementView.png",
-    0,
-    0,
-    500,
-    80,
-    {
-      useMask: true,
-      threshold: 0.8,
-    },
-  )
-  iro?.drawSelf("group_img")
-  return iro
-}
+// // 查找元素视野按钮（判断处于大世界）
+// const findElementViewBtn = () => {
+//   const iro = findImageWithinBounds(
+//     "assets/UI_BtnIcon_ElementView.png",
+//     0,
+//     0,
+//     500,
+//     80,
+//     {
+//       useMask: true,
+//       threshold: 0.8,
+//     },
+//   )
+//   iro?.drawSelf("group_img")
+//   return iro
+// }
 // 查找奇域大厅按钮（判断处于奇域大厅）
 const findBeyondHallBtn = () => {
   const iro = findImageWithinBounds(
@@ -94,40 +94,40 @@ const findBeyondHallBtn = () => {
   iro?.drawSelf("group_img")
   return iro
 }
-// 房间：查找搜索奇域按钮
-const findAllWonderlandsBtn = () => {
-  return findTextWithinBounds("搜索", 1320, 0, 600, 95, { contains: true })
-}
-// 房间：查找奇域搜索输入框
-const findSearchWonderlandInput = () => {
-  return findTextWithinBounds("搜索", 0, 120, 1920, 60, { contains: true })
-}
-// 房间：查找奇域搜索输入框清除按钮
-const findClearInputBtn = () => {
-  return findTextWithinBounds("清除", 0, 120, 1920, 60)
-}
-// 房间：查找搜索奇域按钮
-const findSearchWonderlandBtn = () => {
-  return findTextWithinBounds("搜索", 0, 120, 1920, 60, { contains: true })
-}
-// 房间：查找搜索过于频繁提示
-const findSearchWonderlandThrottleMsg = () => {
-  return findTextWithinBounds("过于频繁", 0, 0, 1920, 300, { contains: true })
-}
-// 房间：查找第一个奇域搜索结果名称
-const findFirstSearchResultText = () => {
-  const ir = captureGameRegion()
-  const ro = RecognitionObject.ocr(240, 390, 300, 50)
-  return (() => {
-    const list = ir.findMulti(ro)
-    for (let i = 0; i < list.count; i++)
-      if (list[i] && list[i].isExist()) return list[i].text
-  })()
-}
-// 房间：点击选择第一个搜索结果位置
-const clickToChooseFirstSearchResult = () => {
-  click(330, 365)
-}
+// // 房间：查找搜索奇域按钮
+// const findAllWonderlandsBtn = () => {
+//   return findTextWithinBounds("搜索", 1320, 0, 600, 95, { contains: true })
+// }
+// // 房间：查找奇域搜索输入框
+// const findSearchWonderlandInput = () => {
+//   return findTextWithinBounds("搜索", 0, 120, 1920, 60, { contains: true })
+// }
+// // 房间：查找奇域搜索输入框清除按钮
+// const findClearInputBtn = () => {
+//   return findTextWithinBounds("清除", 0, 120, 1920, 60)
+// }
+// // 房间：查找搜索奇域按钮
+// const findSearchWonderlandBtn = () => {
+//   return findTextWithinBounds("搜索", 0, 120, 1920, 60, { contains: true })
+// }
+// // 房间：查找搜索过于频繁提示
+// const findSearchWonderlandThrottleMsg = () => {
+//   return findTextWithinBounds("过于频繁", 0, 0, 1920, 300, { contains: true })
+// }
+// // 房间：查找第一个奇域搜索结果名称
+// const findFirstSearchResultText = () => {
+//   const ir = captureGameRegion()
+//   const ro = RecognitionObject.ocr(240, 390, 300, 50)
+//   return (() => {
+//     const list = ir.findMulti(ro)
+//     for (let i = 0; i < list.count; i++)
+//       if (list[i] && list[i].isExist()) return list[i].text
+//   })()
+// }
+// // 房间：点击选择第一个搜索结果位置
+// const clickToChooseFirstSearchResult = () => {
+//   click(330, 365)
+// }
 // 房间：点击选择指定的奇域位置
 const clickToChooseFirstLikeResult = () => {
   click(1145, 825)
@@ -243,47 +243,47 @@ const findStageEscBtn = () => {
 const findExitStageBtn = () => {
   return findTextWithinBounds("中断挑战", 576, 324, 768, 432)
 }
-// 退出：查找返回提瓦特按钮
-const findGotTeyvatBtn = () => {
-  return findTextWithinBounds("返回", 1500, 0, 300, 95, { contains: true })
-}
-// 纪游：查找诸界纪游按钮
-const findBeyondBattlepassBtn = () => {
-  const iro = findImageWithinBounds(
-    "assets/UI_BtnIcon_Beyond_Battlepass.png",
-    960,
-    0,
-    960,
-    80,
-    {
-      useMask: true,
-      threshold: 0.75,
-    },
-  )
-  iro?.drawSelf("group_img")
-  return iro
-}
-// 纪游：查找纪游开屏动画
-const findBeyondBattlepassPopup = () => {
-  return findTextWithinBounds("奖励一览", 0, 0, 960, 1080, { contains: true })
-}
-// 纪游：查找领取奖励按钮
-const findFetchRewardBtn = () => {
-  const iro = findImageWithinBounds(
-    "assets/UI_Img_UGCCultivateReward_FetchHint.png",
-    1550,
-    100,
-    370,
-    880,
-    {
-      useMask: true,
-      use3Channels: true,
-      threshold: 0.8,
-    },
-  )
-  iro?.drawSelf("group_img")
-  return iro
-}
+// // 退出：查找返回提瓦特按钮
+// const findGotTeyvatBtn = () => {
+//   return findTextWithinBounds("返回", 1500, 0, 300, 95, { contains: true })
+// }
+// // 纪游：查找诸界纪游按钮
+// const findBeyondBattlepassBtn = () => {
+//   const iro = findImageWithinBounds(
+//     "assets/UI_BtnIcon_Beyond_Battlepass.png",
+//     960,
+//     0,
+//     960,
+//     80,
+//     {
+//       useMask: true,
+//       threshold: 0.75,
+//     },
+//   )
+//   iro?.drawSelf("group_img")
+//   return iro
+// }
+// // 纪游：查找纪游开屏动画
+// const findBeyondBattlepassPopup = () => {
+//   return findTextWithinBounds("奖励一览", 0, 0, 960, 1080, { contains: true })
+// }
+// // 纪游：查找领取奖励按钮
+// const findFetchRewardBtn = () => {
+//   const iro = findImageWithinBounds(
+//     "assets/UI_Img_UGCCultivateReward_FetchHint.png",
+//     1550,
+//     100,
+//     370,
+//     880,
+//     {
+//       useMask: true,
+//       use3Channels: true,
+//       threshold: 0.8,
+//     },
+//   )
+//   iro?.drawSelf("group_img")
+//   return iro
+// }
 
 //#endregion
 export {
