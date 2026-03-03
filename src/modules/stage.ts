@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   assertRegionAppearing,
   assertRegionDisappearing,
@@ -21,7 +20,7 @@ import { isInLobby } from "./lobby.js"
 const availablePlaybackFiles = () => {
   return [...file.readPathSync("assets/playbacks")].map((path) => path.replace(/\\/g, "/"))
 }
-const playStage = async (playbacks: any) => {
+const playStage = async (playbacks: string[]) => {
   if (
     !(await waitForAction(
       () => findStageEscBtn() !== void 0 || findBottomBtnText("返回大厅") !== void 0,
@@ -31,8 +30,8 @@ const playStage = async (playbacks: any) => {
         // 判断是否已经加入准备区
         if (findPrepareMsg()) {
           log.info("加入准备区...")
-          await assertRegionDisappearing(findPrepareMsg, "等待加入准备区提示消失超时")
           clickToPrepare()
+          await assertRegionDisappearing(findPrepareMsg, "等待加入准备区提示消失超时")
         }
       },
       { maxAttempts: 60 },
@@ -70,7 +69,7 @@ const playStage = async (playbacks: any) => {
   await exitStageToLobby()
 }
 // 执行通关回放文件（随机抽取）
-const execStagePlayback = async (playbacks: string | any[]) => {
+const execStagePlayback = async (playbacks: string[]) => {
   const file = playbacks[Math.floor(Math.random() * playbacks.length)]
   log.info("执行通关回放文件: {file}", file)
   await keyMouseScript.runFile(file)
