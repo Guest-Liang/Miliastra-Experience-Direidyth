@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { getErrorMessage, isHostException } from "@bettergi/utils"
 import { userConfig } from "../config/config"
 import { enterRoom, leaveRoom } from "../modules/room"
@@ -9,8 +8,8 @@ const execWeeklyTask = async () => {
   // 确保通关回放文件存在
   const files = availablePlaybackFiles()
   const playbacks = userConfig.playbacks
-    .map((file: any) => `assets/playbacks/${file}`)
-    .filter((path: any) => files.includes(path))
+    .map((playbackFile) => `assets/playbacks/${playbackFile}`)
+    .filter((playbackPath) => files.includes(playbackPath))
   if (playbacks.length === 0) {
     log.warn("未找到任何通关回放文件，请确保已录制回放并拷贝到 assets/playbacks 目录下")
     return
