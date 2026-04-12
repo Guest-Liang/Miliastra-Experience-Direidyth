@@ -157,7 +157,7 @@ const findGoToLobbyBtn = () => {
 }
 // 房间：查找创建房间按钮
 const findCreateRoomBtn = () => {
-  return findTextWithinBounds("房间", 960, 140, 960, 70, { contains: true })
+  return findTextWithinBounds("房间", 960, 100, 960, 70, { contains: true })
 }
 // 房间：点击加入准备区位置
 const clickToPrepare = () => {

@@ -30,7 +30,10 @@ const playStage = async (playbacks: string[]) => {
         // 判断是否已经加入准备区
         if (findPrepareMsg()) {
           log.info("加入准备区...")
-          clickToPrepare()
+          // await sleep(3e3) // 等待提示消失再按
+          clickToPrepare() // 第一次按让提示消失
+          await sleep(500)
+          clickToPrepare() // 第二次才真正按到
           await assertRegionDisappearing(findPrepareMsg, "等待加入准备区提示消失超时")
         }
       },
